@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\AdminPanel;
 
+use App\Http\Requests\LoginFormRequest;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 use App\Admin;
@@ -27,7 +28,10 @@ use AuthenticatesUsers;
 
         return view('AdminPanel.adminpanel', [
             'title' => 'Админ панель',
-            'loginRoute' => 'logininadminpanel',
+            'message' => 'Введите регистрационные данные для входа в ваш личный кабинет.',
+            'loginRoute' => 'login-in-adminpanel',
+            'enter' => 'Вход',
+            'href' => 'Регистрация',
             'forgotPasswordRoute' => 'admin.password.request',
         ]);
  }
@@ -39,7 +43,7 @@ use AuthenticatesUsers;
             ->with('error','Login failed, please try again!');
     }
 
-    public function Datasend(Request $request)
+    public function Datasend(LoginFormRequest $request)
     {
 
         if(Auth::guard('admin')->attempt($request->only('username','password'),$request->filled('remember'))){

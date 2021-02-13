@@ -3,20 +3,28 @@
 namespace App\Http\Controllers\AdminPanel;
 
 use App\Admin;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
+use App\Http\Requests\RegisterFormRequest;
 
 class RegisterController extends Controller
 {
 
     public function getViewRegister(){
 
-        return view('admin.AdminPanel.adminPanelRegister');
-    }
+         return view('AdminPanel.adminpanel', [
+                'title' => 'Регистрация',
+                'message' => 'Введите имя и пароль для регистрации в админ панели.',
+                'loginRoute' => 'register-in-adminpanel',
+                'enter' => 'Готово',
+                'href' => 'Назад',
+                'forgotPasswordRoute' => 'admin.password.request',]);
+
+        }
 
 
-    public function sendDataRegister(Request $request)
+
+    public function Datasend(RegisterFormRequest $request)
     {
         $data = $request->all();
 
@@ -24,7 +32,9 @@ class RegisterController extends Controller
 
         Admin::create($data);
 
-        return Redirect::route('showView-login-In-AdminPanel');
+        return redirect('form')->withInput();
+
+//        return Redirect::route('showView-Login-in-AdminPanel')->withInput();
     }
 
 }

@@ -298,7 +298,7 @@ FOOTER
 	bottom: -1px;
 }
 
-/* Стили бара vladmaxi, можно удалить */
+/* пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ vladmaxi, пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ */
 .vladmaxi-top{
 	line-height: 24px;
 	font-size: 11px;
@@ -336,4 +336,9 @@ FOOTER
 .vladmaxi-top span.right a{
 	float: left;
 	display: block;
+}
+
+.invalid-feedback{
+	margin-top: 2px;
+	color: red;
 }

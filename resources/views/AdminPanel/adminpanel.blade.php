@@ -2,9 +2,11 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title></title>
     <link href="css/style.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
 
 </head>
 <body>
@@ -17,20 +19,42 @@
 
         <div class="header">
             <h1>{{ $title }}</h1>
-            <span>Введите ваши регистрационные данные для входа в ваш личный кабинет. </span>
+            <span>{{ $message }}</span>
         </div>
 
         <div class="content">
-            <input name="username" type="text" class="input username" value="Логин" onfocus="this.value=''" />
-            <input name="password" type="password" class="input password" value="Пароль" onfocus="this.value=''" />
 
-            {{ csrf_field() }}
+            <input name="username" type="text" class="input username" placeholder="Логин" value="{{ old('username') }}"/>
+            @error('username')
+            <div class="invalid-feedback">
+                     <strong>{{ $message }}</strong>
+            </div>
+            @enderror
+
+            <input name="password" type="password" class="input password" placeholder="Пароль"  />
+
+            @error('password')
+            <div class="invalid-feedback">
+                <strong>{{ $message }}</strong>
+            </div>
+            @enderror
+
+
         </div>
 
         <div class="footer">
 
-            <button class="button">ВХОД</button>
-            <input type="submit" name="submit" value="Регистрация" class="register" />
+            <button class="button">{{$enter}}</button>
+
+        {{--делаем проверку на соответствие маршруту--}}
+            @if (Route::currentRouteName() == 'showView-Login-in-AdminPanel')
+
+            <a href="{{ route('showView-Register-in-AdminPanel') }}" class="">{{$href}}</a>
+            @else
+            <a href="{{ route('showView-Login-in-AdminPanel') }}" class="">{{$href}}</a>
+
+             @endif
+
         </div>
 
     </form>
